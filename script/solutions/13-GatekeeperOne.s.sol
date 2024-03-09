@@ -5,7 +5,7 @@ import {Script, console2} from "forge-std/Script.sol";
 import {EthernautHelper} from "../setup/EthernautHelper.sol";
 
 // NOTE You can import your helper contracts & create interfaces here
-//  import "../../src/13-GatekeeperOneAttacker.sol";
+import "../../src/13-GatekeeperOneAttacker.sol";
 
 contract GatekeeperOneSolution is Script, EthernautHelper {
     address constant LEVEL_ADDRESS = 0xb5858B8EDE0030e46C0Ac1aaAedea8Fb71EF423C;
@@ -17,7 +17,8 @@ contract GatekeeperOneSolution is Script, EthernautHelper {
         address challengeInstance = createInstance(LEVEL_ADDRESS);
 
         // YOUR SOLUTION HERE
-
+        GatekeeperOneAttacker attacker = new GatekeeperOneAttacker();
+        attacker.attack(challengeInstance);
 
         // SUBMIT CHALLENGE. (DON'T EDIT)
         bool levelSuccess = submitInstance(challengeInstance);
