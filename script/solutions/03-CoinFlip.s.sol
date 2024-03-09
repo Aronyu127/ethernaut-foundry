@@ -5,21 +5,22 @@ import {Script, console2} from "forge-std/Script.sol";
 import {EthernautHelper} from "../setup/EthernautHelper.sol";
 
 // NOTE You can import your helper contracts & create interfaces here
-// import {CoinFlipAttacker} from "../../src/03-CoinFlipAttacker.sol";
+import {CoinFlipAttacker} from "../../src/03-CoinFlipAttacker.sol";
+import {CoinFlip} from "../../challenge-contracts/03-CoinFlip.sol";
 
 contract CoinFlipSolution is Script, EthernautHelper {
     address constant LEVEL_ADDRESS = 0xA62fE5344FE62AdC1F356447B669E9E6D10abaaF;
     uint256 heroPrivateKey = vm.envUint("PRIVATE_KEY");
-    address challengeInstanceOnChain = 0xE17e4fb48D30f247F749a42Ab35E8465C1ac4732; // Change this address into yours after step1 executed.
-    address coinFlipAttackerAddress = 0x38eddcE71f8d83eBEfe41bEA8EEdb40d8A6e9b93; // Change this address into yours after step1 executed.
+    address challengeInstanceOnChain = 0x34B9c686b046fbee041A1dBFfCe6c6Ea522DE330; // Change this address into yours after step1 executed.
+    address coinFlipAttackerAddress = 0x160bd70a3a8B4528E0295d1950F50D57c2b8C2A5; // Change this address into yours after step1 executed.
 
     function run() public {
         vm.startBroadcast(heroPrivateKey);
         // NOTE this is the address of your challenge contract
         address challengeInstance = createInstance(LEVEL_ADDRESS);
 
+        CoinFlip coinFlip = CoinFlip(challengeInstance);
         // YOUR SOLUTION HERE 
-
 
         // SUBMIT CHALLENGE. (DON'T EDIT)
         bool levelSuccess = submitInstance(challengeInstance);
@@ -41,15 +42,10 @@ contract CoinFlipSolution is Script, EthernautHelper {
         console2.log("challengeInstanceOnChain:", challengeInstance);
 
         // YOUR SOLUTION HERE 
-        // CoinFlipAttacker coinFlipAttacker = new CoinFlipAttacker(challengeInstance);
-        // console2.log("coinFlipAttackerAddress:", address(coinFlipAttacker));
-
-        console2.log("block.number:", block.number);
-        // coinFlipAttacker.attack();
-
+        CoinFlipAttacker coinFlipAttacker = new CoinFlipAttacker(challengeInstance);
+        coinFlipAttacker.attack();
+        console2.log("coinFlipAttackerAddress:", address(coinFlipAttacker));
         vm.stopBroadcast();
-
-        console2.log(successMessage(3));
     }
 
     /**
@@ -60,12 +56,10 @@ contract CoinFlipSolution is Script, EthernautHelper {
     function step2() public {
         vm.startBroadcast(heroPrivateKey);
 
+        CoinFlipAttacker(coinFlipAttackerAddress).attack();
         console2.log("block.number:", block.number);
-        // CoinFlipAttacker(coinFlipAttackerAddress).attack();
-
+        console2.log("consecutiveWins:", CoinFlip(challengeInstanceOnChain).consecutiveWins());
         vm.stopBroadcast();
-
-        console2.log(successMessage(3));
     }
 
     /**
