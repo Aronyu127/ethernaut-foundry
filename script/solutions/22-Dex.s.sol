@@ -5,7 +5,7 @@ import {Script, console2} from "forge-std/Script.sol";
 import {EthernautHelper} from "../setup/EthernautHelper.sol";
 
 // NOTE You can import your helper contracts & create interfaces here
-import "../../src/22-DexAttacker.sol";
+//  import "../../src/22-DexAttacker.sol";
 
 contract DexSolution is Script, EthernautHelper {
     address constant LEVEL_ADDRESS = 0xB468f8e42AC0fAe675B56bc6FDa9C0563B61A52F;
@@ -18,9 +18,6 @@ contract DexSolution is Script, EthernautHelper {
         address challengeInstance = _createInstance(LEVEL_ADDRESS);
 
         // YOUR SOLUTION HERE
-        DexAttacker dexAttacker = new DexAttacker(challengeInstance);
-        IDex(challengeInstance).approve(address(dexAttacker), type(uint).max);
-        dexAttacker.attack();
 
         // SUBMIT CHALLENGE. (DON'T EDIT)
         bool levelSuccess = submitInstance(challengeInstance);

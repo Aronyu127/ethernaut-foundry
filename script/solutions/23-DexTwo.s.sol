@@ -5,7 +5,7 @@ import {Script, console2} from "forge-std/Script.sol";
 import {EthernautHelper} from "../setup/EthernautHelper.sol";
 
 // NOTE You can import your helper contracts & create interfaces here
-import "../../src/23-DexTwoAttacker.sol";
+//  import "../../src/23-DexTwoAttacker.sol";
 
 contract DexTwoSolution is Script, EthernautHelper {
     address constant LEVEL_ADDRESS = 0xf59112032D54862E199626F55cFad4F8a3b0Fce9;
@@ -18,8 +18,6 @@ contract DexTwoSolution is Script, EthernautHelper {
         address challengeInstance = _createInstance(LEVEL_ADDRESS);
 
         // YOUR SOLUTION HERE
-        DexTwoAttacker dexTwoAttacker = new DexTwoAttacker{value: 400}(challengeInstance);
-        dexTwoAttacker.attack();
 
         // SUBMIT CHALLENGE. (DON'T EDIT)
         bool levelSuccess = submitInstance(challengeInstance);

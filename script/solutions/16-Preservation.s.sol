@@ -5,7 +5,7 @@ import {Script, console2} from "forge-std/Script.sol";
 import {EthernautHelper} from "../setup/EthernautHelper.sol";
 
 // NOTE You can import your helper contracts & create interfaces here
-import "../../src/16-PreservationAttacker.sol";
+//  import "../../src/16-PreservationAttacker.sol";
 
 contract PreservationSolution is Script, EthernautHelper {
     address constant LEVEL_ADDRESS = 0x7ae0655F0Ee1e7752D7C62493CEa1E69A810e2ed;
@@ -17,10 +17,6 @@ contract PreservationSolution is Script, EthernautHelper {
         address challengeInstance = createInstance(LEVEL_ADDRESS);
 
         // YOUR SOLUTION HERE
-        PreservationDelegator preservationDelegator = new PreservationDelegator();
-        PreservationAttacker preservationAttacker = new PreservationAttacker(challengeInstance, address(preservationDelegator));
-        preservationAttacker.attack();
-
 
         // SUBMIT CHALLENGE. (DON'T EDIT)
         bool levelSuccess = submitInstance(challengeInstance);

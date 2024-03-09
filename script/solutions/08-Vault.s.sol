@@ -31,8 +31,6 @@ contract VaultSolution is Script, EthernautHelper {
          *
          */
          
-        bytes32 password = vm.load(challengeInstance, bytes32(uint256(1)));
-        challengeInstance.call(abi.encodeWithSignature("unlock(bytes32)", password));
 
         // SUBMIT CHALLENGE. (DON'T EDIT)
         bool levelSuccess = submitInstance(challengeInstance);

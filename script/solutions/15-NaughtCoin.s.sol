@@ -5,7 +5,7 @@ import {Script, console2} from "forge-std/Script.sol";
 import {EthernautHelper} from "../setup/EthernautHelper.sol";
 
 // NOTE You can import your helper contracts & create interfaces here
-import "../../src/15-NaughtCoinAttacker.sol";
+//  import "../../src/15-NaughtCoinAttacker.sol";
 
 interface IERC20 {
     event Transfer(address indexed from, address indexed to, uint256 value);
@@ -29,9 +29,6 @@ contract NaughtCoinSolution is Script, EthernautHelper {
         address challengeInstance = _createInstance(LEVEL_ADDRESS);
 
         // YOUR SOLUTION HERE
-        NaughtCoinAttacker naughtCoinAttacker = new NaughtCoinAttacker(challengeInstance);
-        IERC20(challengeInstance).approve(address(naughtCoinAttacker), 1000000 * (10**18));
-        naughtCoinAttacker.attack();
 
         // SUBMIT CHALLENGE. (DON'T EDIT)
         bool levelSuccess = submitInstance(challengeInstance);

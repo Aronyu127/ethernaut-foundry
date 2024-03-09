@@ -5,7 +5,7 @@ import {Script, console2} from "forge-std/Script.sol";
 import {EthernautHelper} from "../setup/EthernautHelper.sol";
 
 // NOTE You can import your helper contracts & create interfaces here
-import "../../src/19-AlienCodexAttacker.sol";
+//  import "../../src/19-AlienCodexAttacker.sol";
 
 contract AlienCodexSolution is Script, EthernautHelper {
     address constant LEVEL_ADDRESS = 0x0BC04aa6aaC163A6B3667636D798FA053D43BD11;
@@ -40,8 +40,6 @@ contract AlienCodexSolution is Script, EthernautHelper {
          * i = 2^256 - p or 2^256 - keccak256(1) of codex!
          * //////////////////////////////////////////////////////////////////////////
          */
-        AlienCodexAttacker alienCodexAttacker = new AlienCodexAttacker(challengeInstance);
-        alienCodexAttacker.attack();
 
         // SUBMIT CHALLENGE. (DON'T EDIT)
         bool levelSuccess = submitInstance(challengeInstance);
