@@ -5,7 +5,7 @@ import {Script, console2} from "forge-std/Script.sol";
 import {EthernautHelper} from "../setup/EthernautHelper.sol";
 
 // NOTE You can import your helper contracts & create interfaces here
-//  import "../../src/20-DenialAttacker.sol";
+import { DenialAttacker } from  "../../src/20-DenialAttacker.sol";
 
 contract DenialSolution is Script, EthernautHelper {
     address constant LEVEL_ADDRESS = 0x2427aF06f748A6adb651aCaB0cA8FbC7EaF802e6;
@@ -14,9 +14,11 @@ contract DenialSolution is Script, EthernautHelper {
     function run() public {
         vm.startBroadcast(heroPrivateKey);
         // NOTE this is the address of your challenge contract
-        address challengeInstance = 0xcfE5fa726434dB5fa096Ca50999da604dff7f48a; // Hard coding
+        address challengeInstance = 0xf5Bae522910CAf85E8a1B659DBc0e20BF41254A5; // Hard coding
 
         // YOUR SOLUTION HERE
+        DenialAttacker attacker = new DenialAttacker(challengeInstance);
+        attacker.attack();
 
         // SUBMIT CHALLENGE. (DON'T EDIT)
         bool levelSuccess = submitInstance(challengeInstance);
