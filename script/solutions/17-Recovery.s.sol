@@ -9,26 +9,38 @@ import {EthernautHelper} from "../setup/EthernautHelper.sol";
 
 contract RecoverySolution is Script, EthernautHelper {
     address constant LEVEL_ADDRESS = 0xAF98ab8F2e2B24F42C661ed023237f5B7acAB048;
+    address instanceAddress = 0xdb766342603a5fB46BE96994474C1CA80BA94732; // change to your own instanceAddress
+    address tokenAddress = 0xd5925AF07391D54448F91d3EdAE093CaCB5A5A40; // change to your own tokenAddress
     uint256 heroPrivateKey = vm.envUint("PRIVATE_KEY");
 
-    function run() public {
+
+    // function run() public {
+    //     vm.startBroadcast(heroPrivateKey);
+    //     // NOTE this is the address of your challenge contract
+    //     // NOTE Must send at least 0.001 ETH
+    //     address challengeInstance = __createInstance(LEVEL_ADDRESS);
+    //     // SUBMIT CHALLENGE. (DON'T EDIT)
+    //     bool levelSuccess = submitInstance(challengeInstance);
+    //     require(levelSuccess, "Challenge not passed yet");
+    //     vm.stopBroadcast();
+
+    //     console2.log(successMessage(17));
+    // }
+
+    function step1() public {
         vm.startBroadcast(heroPrivateKey);
-        // NOTE this is the address of your challenge contract
-        // NOTE Must send at least 0.001 ETH
         address challengeInstance = __createInstance(LEVEL_ADDRESS);
+        console2.log("instance address:", challengeInstance);
+        vm.stopBroadcast();
+    }
 
-        // YOUR SOLUTION HERE
-        /** 
-         * NOTE nonces works differently for EOA and Contracts. While for a contract, 
-         * the nonce (start from 1) is the number of contract that the contract itself has created, 
-         * for EOA the nonce (start from 0) is the number of transaction that it has made.
-         * NOTE the `new` keyword uses the `CREATE` opcode.
-         * NOTE bytes20(some_bytes32_value) is capturing top (left) 20 bytes.
-         * NOTE uint160(uint256(some_bytes32_value)) is capturing lowest (right) 20 bytes.
-         */
+    function step2() public {
+        vm.startBroadcast(heroPrivateKey);
 
-        // SUBMIT CHALLENGE. (DON'T EDIT)
-        bool levelSuccess = submitInstance(challengeInstance);
+        (bool success, ) = tokenAddress.call(abi.encodeWithSignature("destroy(address)", vm.envAddress("ACCOUNT_ADDRESS")));
+
+        require(success, "call fail");
+        bool levelSuccess = submitInstance(instanceAddress);
         require(levelSuccess, "Challenge not passed yet");
         vm.stopBroadcast();
 
