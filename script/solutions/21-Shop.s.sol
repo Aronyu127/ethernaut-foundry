@@ -5,7 +5,7 @@ import {Script, console2} from "forge-std/Script.sol";
 import {EthernautHelper} from "../setup/EthernautHelper.sol";
 
 // NOTE You can import your helper contracts & create interfaces here
-//  import "../../src/21-ShopAttacker.sol";
+import { ShopAttacker } from  "../../src/21-ShopAttacker.sol";
 
 contract ShopSolution is Script, EthernautHelper {
     address constant LEVEL_ADDRESS = 0x691eeA9286124c043B82997201E805646b76351a;
@@ -17,6 +17,8 @@ contract ShopSolution is Script, EthernautHelper {
         address challengeInstance = createInstance(LEVEL_ADDRESS);
 
         // YOUR SOLUTION HERE 
+        ShopAttacker attacker = new ShopAttacker(challengeInstance);
+        attacker.attack();
 
         // SUBMIT CHALLENGE. (DON'T EDIT)
         bool levelSuccess = submitInstance(challengeInstance);
